@@ -1,5 +1,5 @@
 package entity
 
 type Sequence struct{
-  list []Card 'json:"sequence"'
+  list [5]Card `json:"list"` 
 }
