@@ -1,0 +1,2 @@
+This is a thin layer between interface and domain, it could call domain services
+to serve the application purposes.

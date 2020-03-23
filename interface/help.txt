@@ -1,0 +1,2 @@
+This layer responsibles for the interaction with user,
+whether software presents information or recieves information from user.
