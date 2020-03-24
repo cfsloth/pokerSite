@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"./domain/value"
 )
 
@@ -20,6 +22,8 @@ func main() {
 	//fmt.Println(string(str))
 
 	//Test Shuufling a deck
-	value.RiffleShuffleDeck(deck)
-
+	for i := 0; i < 10; i++ {
+		deck = value.RiffleShuffleDeck(deck)
+		fmt.Println(deck)
+	}
 }
