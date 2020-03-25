@@ -10,14 +10,14 @@ import (
 )
 
 type Deck struct {
-	Id        int64
+	ID        int64
 	CardArray []entity.Card
 }
 
 func CreatePokerDeck() Deck {
 	fmt.Println("Creating a Poker Deck")
 	var deck Deck
-	deck.Id = 1
+	deck.ID = 1
 	var array []string
 	array = append(array, "Clubs")
 	array = append(array, "Hearths")
@@ -67,4 +67,41 @@ func RiffleShuffleDeck(deck Deck) Deck {
 	smallPileArray = nil
 	card = nil
 	return deck
+}
+
+func Pop(deck Deck) entity.Card {
+	element := deck.CardArray[len(deck.CardArray)]
+	if len(deck.CardArray) > 1 {
+		deck.CardArray = deck.CardArray[:len(deck.CardArray)-1]
+	}
+	return element
+}
+
+func AddToBeggin(deck Deck) {
+
+}
+
+func DealingHandsAndStack(deck Deck, handsStack []entity.Hand) ([]entity.Hand, []entity.Card) {
+	if len(handsStack) < 1 {
+		panic("The end stack is empty")
+	}
+	//Dealing hands
+	for i := 0; i < len(handsStack); i++ {
+		handsStack[i].FirstCard = Pop(deck)
+	}
+	for i := 0; i < len(handsStack); i++ {
+		handsStack[i].SecondCard = Pop(deck)
+	}
+	//Dealing the stack
+	var stack []entity.Card
+	stack = append(stack, Pop(deck))
+	stack = append(stack, Pop(deck))
+	stack = append(stack, Pop(deck))
+	value := Pop(deck)
+	AddToBeggin(deck, value)
+	stack = append(stack, Pop(deck))
+	value = Pop(deck)
+	AddToBeggin(deck, value)
+	stack = append(stack, Pop(deck))
+	return handsStack, stack
 }
