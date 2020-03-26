@@ -77,8 +77,12 @@ func Pop(deck Deck) entity.Card {
 	return element
 }
 
-func AddToBeggin(deck Deck) {
-
+func AddToBeggin(deck Deck,value entity.Card) Deck{
+		cardArray []entity.Card
+		cardArray = append(cardArray,value)
+		cardArray = copy(cardArray[1:],deck.CardArray)
+		deck.CardArray = cardArray
+		return deck
 }
 
 func DealingHandsAndStack(deck Deck, handsStack []entity.Hand) ([]entity.Hand, []entity.Card) {
