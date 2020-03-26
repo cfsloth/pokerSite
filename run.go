@@ -28,6 +28,6 @@ func main() {
 		fmt.Println(deck)
 	}
 	hands := []entity.Hand{entity.Hand{},entity.Hand{},entity.Hand{},entity.Hand{}}
-	deck, hands = value.DealingHandsAndStack(deck,hands)
+	deck, hands = value.DealingHands(deck,hands)
 	fmt.Println(hands)
 }

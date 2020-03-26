@@ -85,7 +85,7 @@ func AddToBeggin(deck Deck,value entity.Card) Deck{
 		return deck
 }
 
-func DealingHandsAndStack(deck Deck, handsStack []entity.Hand) (Deck, []entity.Hand) {
+func DealingHands(deck Deck, handsStack []entity.Hand) (Deck, []entity.Hand) {
 	var newDeck Deck = deck
 	if len(handsStack) < 1 {
 		panic("The end stack is empty")
