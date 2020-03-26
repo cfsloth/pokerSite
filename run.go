@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"./domain/entity"
 	"./domain/value"
 )
 
@@ -26,4 +27,7 @@ func main() {
 		deck = value.RiffleShuffleDeck(deck)
 		fmt.Println(deck)
 	}
+	hands := []entity.Hand{entity.Hand{},entity.Hand{},entity.Hand{},entity.Hand{}}
+	deck, hands = value.DealingHandsAndStack(deck,hands)
+	fmt.Println(hands)
 }

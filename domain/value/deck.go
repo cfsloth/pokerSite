@@ -69,43 +69,33 @@ func RiffleShuffleDeck(deck Deck) Deck {
 	return deck
 }
 
-func Pop(deck Deck) entity.Card {
-	element := deck.CardArray[len(deck.CardArray)]
-	if len(deck.CardArray) > 1 {
-		deck.CardArray = deck.CardArray[:len(deck.CardArray)-1]
-	}
-	return element
+func Pop(deck Deck) (entity.Card, Deck) {
+	cardArray := make([]entity.Card,len(deck.CardArray)-1)
+	card := deck.CardArray[len(deck.CardArray)-1]
+	copy(cardArray,deck.CardArray[:len(deck.CardArray)-1])
+	deck.CardArray = cardArray
+	return card, deck
 }
 
 func AddToBeggin(deck Deck,value entity.Card) Deck{
-		cardArray []entity.Card
-		cardArray = append(cardArray,value)
-		cardArray = copy(cardArray[1:],deck.CardArray)
+		cardArray := make([]entity.Card,len(deck.CardArray)+1)
+		copy(cardArray[1:],deck.CardArray[:len(deck.CardArray)-1])
+		cardArray[0] = value
 		deck.CardArray = cardArray
 		return deck
 }
 
-func DealingHandsAndStack(deck Deck, handsStack []entity.Hand) ([]entity.Hand, []entity.Card) {
+func DealingHandsAndStack(deck Deck, handsStack []entity.Hand) (Deck, []entity.Hand) {
+	var newDeck Deck = deck
 	if len(handsStack) < 1 {
 		panic("The end stack is empty")
 	}
 	//Dealing hands
 	for i := 0; i < len(handsStack); i++ {
-		handsStack[i].FirstCard = Pop(deck)
+		handsStack[i].FirstCard,newDeck = Pop(newDeck)
 	}
 	for i := 0; i < len(handsStack); i++ {
-		handsStack[i].SecondCard = Pop(deck)
+		handsStack[i].SecondCard,newDeck = Pop(newDeck)
 	}
-	//Dealing the stack
-	var stack []entity.Card
-	stack = append(stack, Pop(deck))
-	stack = append(stack, Pop(deck))
-	stack = append(stack, Pop(deck))
-	value := Pop(deck)
-	AddToBeggin(deck, value)
-	stack = append(stack, Pop(deck))
-	value = Pop(deck)
-	AddToBeggin(deck, value)
-	stack = append(stack, Pop(deck))
-	return handsStack, stack
+	return deck, handsStack
 }
