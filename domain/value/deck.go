@@ -101,19 +101,21 @@ func DealingHands(deck Deck, handsStack []entity.Hand) (Deck, []entity.Hand) {
 }
 
 func CreatingTheStack(deck Deck) (Deck, []entity.Card){
-	deck := deck
+	newDeck := deck
 	var card entity.Card
 	var cardArray []entity.Card
 	for i:=0;i<5;i++{
-		card, deck = Pop(deck)
+		card, newDeck = Pop(newDeck)
 		cardArray = append(cardArray,card)
 		if i==3 || i==4{
-			deck = AddToBeggin(deck,deck[len(deck)-1])
+			newDeck = AddToBeggin(newDeck,newDeck.CardArray[len(deck.CardArray)-1])
 		}
 	}
-	return deck,cardArray
+	return newDeck,cardArray
 }
 
+/*
 func detectingThings(hand entity.Hand,Stack){
 
 }
+*/
